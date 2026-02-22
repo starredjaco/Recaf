@@ -86,14 +86,14 @@ public class AgentServerRemoteVmResource extends BasicWorkspaceResource implemen
 
 	@Nonnull
 	@Override
-	public Stream<JvmClassBundle> jvmClassBundleStream() {
-		return Stream.concat(super.jvmClassBundleStream(), new ArrayList<>(remoteBundleMap.values()).stream());
+	public Iterable<JvmClassBundle> jvmClassBundles() {
+		return Iterables.concat(super.jvmClassBundles(), new ArrayList<>(remoteBundleMap.values()));
 	}
 
 	@Nonnull
 	@Override
-	public Iterable<JvmClassBundle> jvmClassBundles() {
-		return Iterables.concat(super.jvmClassBundles(), new ArrayList<>(remoteBundleMap.values()));
+	public Stream<JvmClassBundle> jvmClassBundleStream() {
+		return Stream.concat(super.jvmClassBundleStream(), new ArrayList<>(remoteBundleMap.values()).stream());
 	}
 
 	@Override

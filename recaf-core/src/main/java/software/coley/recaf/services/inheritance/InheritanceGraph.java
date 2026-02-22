@@ -59,7 +59,7 @@ public class InheritanceGraph {
 	 */
 	public InheritanceGraph(@Nonnull Workspace workspace) {
 		this.workspace = workspace;
-		this.workspaceNodeProvider = new ClassPathNodeProvider.FromWorkspace(workspace);
+		this.workspaceNodeProvider = new ClassPathNodeProvider.Live(workspace);
 
 		// Populate map lookups with the initial capacity of the number of classes in the workspace plus a buffer.
 		int classesInWorkspace = workspace.allResourcesStream(false /* dont count internal resource classes */)
@@ -115,9 +115,7 @@ public class InheritanceGraph {
 		// Repopulate
 		ClassPathNodeProvider.Cached nodeProvider = ClassPathNodeProvider.cache(workspace);
 		Set<ClassInfo> visited = Collections.newSetFromMap(new IdentityHashMap<>(nodeProvider.size() + 1024 /* leeway */));
-		workspace.forEachClass(false, cls -> {
-			populateParentToChildLookup(cls, visited, nodeProvider);
-		});
+		workspace.forEachClass(false, cls -> populateParentToChildLookup(cls, visited, nodeProvider));
 	}
 
 	/**

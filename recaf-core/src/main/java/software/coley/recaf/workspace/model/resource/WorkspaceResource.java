@@ -135,19 +135,19 @@ public interface WorkspaceResource extends PropertyContainer, Closing {
 	}
 
 	/**
-	 * @return Stream of all immediate JVM class bundles in the resource.
-	 */
-	@Nonnull
-	default Stream<JvmClassBundle> jvmClassBundleStream() {
-		return of(getJvmClassBundle());
-	}
-
-	/**
 	 * @return Iterable of all immediate JVM class bundles in the resource.
 	 */
 	@Nonnull
 	default Iterable<JvmClassBundle> jvmClassBundles() {
 		return List.of(getJvmClassBundle());
+	}
+
+	/**
+	 * @return Stream of all immediate JVM class bundles in the resource.
+	 */
+	@Nonnull
+	default Stream<JvmClassBundle> jvmClassBundleStream() {
+		return of(getJvmClassBundle());
 	}
 
 	/**
